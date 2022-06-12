@@ -1,2 +1,2 @@
 # CuiTools
-A header only library for cui
+A header only library for CUI
