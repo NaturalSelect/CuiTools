@@ -53,7 +53,14 @@ namespace cuitools
         {
             if(this != std::addressof(other))
             {
-
+                this->begin_ = other.begin_;
+                this->end_ = other.end_;
+                this->leftBoundary_ = other.leftBoundary_;
+                this->rightBoundary_ = other.rightBoundary_;
+                this->completedMark_ = other.completedMark_;
+                this->mark_ = other.mark_;
+                this->title_ = other.title_;
+                this->titleSize_ = other.titleSize_;
             }
             return *this;
         }
@@ -121,9 +128,18 @@ namespace cuitools
             this->titleSize_ = titleSize;
         }
 
-        inline std::size_t GetSize() const noexcept
+        inline std::size_t GetTotalProgress() const noexcept
         {
             return this->end_ - 1;
+        }
+
+        inline std::size_t GetProgress() const noexcept
+        {
+            if(!this->begin_)
+            {
+                return 0;
+            }
+            return this->begin_ - 1;
         }
 
         inline void Show()
@@ -140,7 +156,7 @@ namespace cuitools
                 {
                     std::fputs(this->title_,stdout);
                 }
-                for(std::size_t i = 0,count = this->end_ - 1 + this->titleSize_;i != count;++i)
+                for(std::size_t i = 0,count = this->end_ + this->titleSize_;i != count;++i)
                 {
                     std::putchar('\b');
                 }
@@ -156,7 +172,7 @@ namespace cuitools
             {
                 std::putchar(this->completedMark_);
             }
-            if(newProgress == this->end_)
+            if(this->begin_ == this->end_)
             {
                 std::putchar(this->rightBoundary_);
                 if(this->title_)
