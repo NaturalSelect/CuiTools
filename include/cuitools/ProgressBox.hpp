@@ -121,6 +121,11 @@ namespace cuitools
             this->titleSize_ = titleSize;
         }
 
+        inline std::size_t GetSize() const noexcept
+        {
+            return this->end_ - 1;
+        }
+
         inline void Show()
         {
             if(!this->begin_)
@@ -149,7 +154,7 @@ namespace cuitools
             newProgress += 1;
             for (;this->begin_ < newProgress;++this->begin_)
             {
-                std::putchar(this->mark_);
+                std::putchar(this->completedMark_);
             }
             if(newProgress == this->end_)
             {
