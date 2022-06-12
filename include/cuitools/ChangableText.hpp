@@ -78,9 +78,26 @@ namespace cuitools
         }
 
         template<std::size_t _Size>
-        inline void Write(const char (&text)[_Size])
+        inline void Write(const char (&text)[_Size]) noexcept
         {
             this->Write(static_cast<const char*>(text),_Size - 1);
+        }
+
+        inline void Append(const char *str,std::size_t size) noexcept
+        {
+            std::fputs(str,stdout);
+            this->length_ += size;
+        }
+
+        template<std::size_t _Size>
+        inline void Append(const char (&text)[_Size]) noexcept
+        {
+            this->Append(static_cast<const char*>(text),_Size - 1);
+        }
+
+        inline void Submit() noexcept
+        {
+            this->length_ = 0;
         }
     };
 }
