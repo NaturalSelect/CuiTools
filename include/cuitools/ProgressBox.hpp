@@ -147,7 +147,7 @@ namespace cuitools
             return this->begin_ - 1;
         }
 
-        inline void Show()
+        inline void Show() noexcept
         {
             if(!this->begin_)
             {
@@ -170,7 +170,7 @@ namespace cuitools
             }
         }
 
-        inline void Flush(size_t newProgress)
+        inline void Flush(size_t newProgress) noexcept
         {
             newProgress += 1;
             for (;this->begin_ < newProgress;++this->begin_)
@@ -188,7 +188,7 @@ namespace cuitools
             std::fflush(stdout);
         }
 
-        inline void Reset()
+        inline void Reset() noexcept
         {
             this->begin_ = 0;
         }
