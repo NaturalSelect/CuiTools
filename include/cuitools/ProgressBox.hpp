@@ -37,6 +37,11 @@ namespace cuitools
             ,title_(title)
             ,titleSize_(titleSize)
         {}
+
+        template<std::size_t _Size>
+        ProgressBox(std::size_t length,const char (&title)[_Size])
+            :ProgressBox(length,static_cast<const char*>(title),_Size - 1)
+        {}
     
         ProgressBox(const Self &other) = default;
     
