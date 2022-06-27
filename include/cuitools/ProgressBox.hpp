@@ -49,8 +49,11 @@ namespace cuitools
     
         inline Self &operator=(const Self &other)
         {
-            Self tmp{other};
-            std::swap(tmp,*this);
+            if(this != std::addressof(other))
+            {
+                Self tmp{other};
+                std::swap(tmp,*this);
+            }
             return *this;
         }
     
